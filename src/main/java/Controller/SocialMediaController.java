@@ -16,7 +16,7 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("example-endpoint", this::exampleHandler);
+        app.get("example-e", this::exampleHandler);
 
         app.get("/", ctx -> {
             ctx.result("");
