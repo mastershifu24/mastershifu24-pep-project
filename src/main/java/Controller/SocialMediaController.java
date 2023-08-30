@@ -18,6 +18,15 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.get("example-endpoint", this::exampleHandler);
 
+        app.get("/", ctx -> {
+            ctx.result("");
+        });
+
+        app.post("/", ctx -> {
+            ctx.result("");
+        });
+
+        app.start();
         return app;
     }
 
