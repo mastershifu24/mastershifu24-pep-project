@@ -22,8 +22,8 @@ public class SocialMediaController {
             ctx.result("");
         });
 
-        app.post("/", ctx -> {
-            ctx.result("");
+        app.post("/input", ctx -> {
+            ctx.status(201);
         });
 
         app.start();
