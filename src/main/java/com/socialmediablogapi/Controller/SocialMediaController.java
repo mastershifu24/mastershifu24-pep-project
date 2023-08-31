@@ -2,11 +2,11 @@ package com.socialmediablogapi.Controller;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import com.socialmediablogapi.Model.Account;
-import com.socialmediablogapi.Model.Message;
-import com.socialmediablogapi.Service.AccountService;
-import com.socialmediablogapi.Service.MessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Service.AccountService;
+import Service.MessageService;
+
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -39,14 +39,6 @@ public class SocialMediaController {
 
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.post("/register", this::registerAccountHandler);
-        app.post("/login", this::loginAccountHandler);
-        app.post("/messages", this::createMessageHandler);
-        app.get("/messages", this::getAllMessagesHandler);
-        app.get("/messages/{message_id}", this::getMessageByIdHandler);
-        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
-        app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
-        app.get("/accounts/{account_id}", this::getAllMessagesByAccountIdHandler);
 
         private void registerAccountHandler(Context ctx) throws JsonProcessingException {
             Account account = mapper.readValue(ctx.body(), Account.class);
