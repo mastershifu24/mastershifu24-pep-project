@@ -1,5 +1,4 @@
-import com.socialmediablogapi.Controller.SocialMediaController;
-
+import Controller.SocialMediaController;
 import DAO.AccountDAO;
 import io.javalin.Javalin;
 

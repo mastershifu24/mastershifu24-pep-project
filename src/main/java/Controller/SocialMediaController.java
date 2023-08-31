@@ -1,15 +1,18 @@
-package com.socialmediablogapi.Controller;
+package Controller;
 
-import io.javalin.Javalin;
-import io.javalin.http.Context;
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Model.Account;
+import Model.Message;
 import Service.AccountService;
+import Service.AccountServiceimplements;
 import Service.MessageService;
-
-import java.util.List;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
+import Service.MessageServiceimplements;
+import io.javalin.Javalin;
+import io.javalin.http.Context;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
@@ -23,32 +26,21 @@ public class SocialMediaController {
      * @return a Javalin app object which defines the behavior of the Javalin controller.
      */
 
-    private AccountService accountService;
-    private MessageService messageService;
-    private ObjectMapper mapper;
+    private AccountServiceimplements accountService;
+    private MessageServiceimplements messageService;
 
     public SocialMediaController(){
-
-    }
-
-    public SocialMediaController(AccountService accountService, MessageService messageService){
-        this.accountService = accountService;
-        this.messageService = messageService;
-        this.mapper = new ObjectMapper();
+        this.accountService = new AccountServiceimplements();
+        this.messageService = new MessageServiceimplements();
     }
 
     public Javalin startAPI() {
         Javalin app = Javalin.create();
+        app.get("example-endpoint", this::exampleHandler);
 
-        private void registerAccountHandler(Context ctx) throws JsonProcessingException {
-            Account account = mapper.readValue(ctx.body(), Account.class);
-            Account registerAccount = accountService.registerAccount(account);
-            if(registerAccount == null){
-                ctx.status(400);
-            } else {
-                ctx.json(registerAccount);
-            }
-        }
+        //Start with the account handler
+        app.post("/register", this::addAccountHandler);
+
 
         app.post("/input", ctx -> {
             ctx.status(201);
