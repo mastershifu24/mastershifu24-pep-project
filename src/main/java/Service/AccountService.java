@@ -2,18 +2,41 @@ package Service;
 
 import java.util.ArrayList;
 
+import DAO.AccountDAO;
 import Model.Account;
 
-public interface AccountService {
-    // Create
-    public abstract Account addAccount(Account account);
+public class AccountService {
+    // state
+    private AccountDAO accountDAO;
 
-    // Read
-    // login
-    public abstract Account getAccount(String username, String password);
+    //constructor
+    public void AccountService() {
+        this.accountDAO = new AccountDAO();
+    }
+
+    // create account
+    public Account addAccount(Account account) {
+        if(account.getUsername().isBlank() || account.getPassword().length() < 4){
+            return null;
+        } else {
+            return accountDAO.addAccount(account);
+        }
+        
+    }
+
+    // login to account
+    public Account getAccount(String username, String password) {
+        return accountDAO.getAccount(username, password);
+    }
+
     // get account by id
-    public abstract Account getAccountById(int id);
-    // get all accounts
-    public abstract ArrayList<Account> getAllAccounts();
+    public Account getAccountById(int id) {
+        return accountDAO.getAccountById(id);
+    }
 
+    // get all accounts
+    public ArrayList<Account> getAllAccounts() {
+        return accountDAO.getAllAccounts();
+    }
+    
 }

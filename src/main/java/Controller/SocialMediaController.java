@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Model.Account;
 import Model.Message;
 import Service.AccountService;
-import Service.AccountServiceimplements;
+import Service.AccountService;
 import Service.MessageService;
-import Service.MessageServiceimplements;
+import Service.MessageService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -26,12 +26,12 @@ public class SocialMediaController {
      * @return a Javalin app object which defines the behavior of the Javalin controller.
      */
 
-    private AccountServiceimplements accountService;
-    private MessageServiceimplements messageService;
+    private AccountService accountService;
+    private MessageService messageService;
 
     public SocialMediaController(){
-        this.accountService = new AccountServiceimplements();
-        this.messageService = new MessageServiceimplements();
+        this.accountService = new AccountService();
+        this.messageService = new MessageService();
     }
 
     public Javalin startAPI() {
@@ -72,6 +72,4 @@ public class SocialMediaController {
             ctx.json("");
         }
     }
-}
-
 }

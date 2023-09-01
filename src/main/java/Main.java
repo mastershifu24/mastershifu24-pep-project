@@ -9,13 +9,9 @@ import io.javalin.Javalin;
 public class Main {
     public static void main(String[] args) {
 
-        AccountDAO accountDAO = newAccountDAOImplem();
         SocialMediaController controller = new SocialMediaController();
         Javalin app = controller.startAPI();
-        app.start(8080);
+        app.start(8081);
     }
 
-    private static AccountDAO newAccountDAOImplem() {
-        return null;
-    }
 }
