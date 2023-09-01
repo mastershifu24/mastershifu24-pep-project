@@ -38,12 +38,8 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.get("example-endpoint", this::exampleHandler);
 
+        app.delete("messages/{id}", this::deleteMessageHandler);
 
-        app.post("/input", ctx -> {
-            ctx.status(201);
-        });
-
-        app.start();
         return app;
     }
 
@@ -58,7 +54,7 @@ public class SocialMediaController {
      // delete message
      private void deleteMessageHandler(Context ctx) {
         // get request information
-        String idString = ctx.pathParam("message_id");
+        String idString = ctx.pathParam("id");
         int id = Integer.parseInt(idString);
         // check if message to be deleted exists
         Message deletedMessage = messageService.getMessageById(id);
