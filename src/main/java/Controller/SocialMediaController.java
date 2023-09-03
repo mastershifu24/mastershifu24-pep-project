@@ -26,8 +26,8 @@ public class SocialMediaController {
      * @return a Javalin app object which defines the behavior of the Javalin controller.
      */
 
-    private AccountService accountService;
-    private MessageService messageService;
+    AccountService accountService;
+    MessageService messageService;
 
     public SocialMediaController(){
         this.accountService = new AccountService();
@@ -51,19 +51,8 @@ public class SocialMediaController {
         app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler);
         app.patch("/messages/{message_id}", this::updateMessageHandler);
         app.delete("messages/{id}", this::deleteMessageHandler);
-
         return app;
     }
-
-    //public Javalin startAPI(){
-        //Javalin app = Javalin.create();
-        //app.post("/flights", this::postFlightHandler);
-        //app.put("/flights/{flight_id}", this::updateFlightHandler);
-        //app.get("/flights", this::getAllFlightsHandler);
-       // app.get("/flights/departing/{departure_city}/arriving/{arrival_city}",
-                //this::getAllFlightsDepartingFromCityArrivingToCityHandler);
-       //return app;
-    //}
 
     /**
      * This is an example handler for an example endpoint.
