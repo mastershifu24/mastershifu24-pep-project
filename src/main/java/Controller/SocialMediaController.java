@@ -38,10 +38,26 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.get("example-endpoint", this::exampleHandler);
 
+        // account handler paths
+        app.post("/register", this::addAccountHandler);
+        app.post("/login", this::loginAccountHandler);
+        app.get("/accounts/{account_id}", this::getAccountByIdHandler);
+        app.get("/accounts", this::getAllAccountsHandler);
+
         app.delete("messages/{id}", this::deleteMessageHandler);
 
         return app;
     }
+
+    //public Javalin startAPI(){
+        //Javalin app = Javalin.create();
+        //app.post("/flights", this::postFlightHandler);
+        //app.put("/flights/{flight_id}", this::updateFlightHandler);
+        //app.get("/flights", this::getAllFlightsHandler);
+       // app.get("/flights/departing/{departure_city}/arriving/{arrival_city}",
+                //this::getAllFlightsDepartingFromCityArrivingToCityHandler);
+       //return app;
+    //}
 
     /**
      * This is an example handler for an example endpoint.
