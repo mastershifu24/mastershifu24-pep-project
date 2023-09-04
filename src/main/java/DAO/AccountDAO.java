@@ -38,11 +38,11 @@ public class AccountDAO {
     // login to account
     public Account getAccount(String username, String password) {
            // open connection
-        Connection con = ConnectionUtil.getConnection();
+        Connection connection = ConnectionUtil.getConnection();
         try {
         // create statement
         String sql = "SELECT * FROM account WHERE username = ? AND password = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, username);
         ps.setString(2, password);
 
