@@ -11,11 +11,11 @@ public class AccountDAO {
     // create account
     public Account addAccount(Account account) {
         // open connection
-        Connection con = ConnectionUtil.getConnection();
+        Connection connection = ConnectionUtil.getConnection();
         try {
         // create statement
         String sql = "INSERT INTO account VALUES(default, ?, ?)";
-        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, account.getUsername());
         ps.setString(2, account.getPassword());
 

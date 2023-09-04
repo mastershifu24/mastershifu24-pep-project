@@ -64,6 +64,7 @@ public class SocialMediaController {
 
      // create account
      private void addAccountHandler(Context ctx) {
+        ObjectMapper mapper = new ObjectMapper();
         
         // get request information
         Account account = ctx.bodyAsClass(Account.class);
