@@ -1,74 +1,75 @@
 package Service;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-import DAO.AccountDAO;
-import DAO.MessageDAO;
-import DAO.MessageDAO;
-import Model.Account;
 import Model.Message;
+import DAO.MessageDAO;
+
+
+import java.util.List;
 
 public class MessageService {
-    // state
-    private MessageDAO messageDAO;
-    private AccountDAO accountDAO;
+    MessageDAO messageDAO;
 
-    // constructor 
-    public void MessageService() {
-        this.messageDAO = new MessageDAO();
-        this.accountDAO = new AccountDAO();
+    public MessageService()
+    {
+        messageDAO = new MessageDAO();
     }
 
-    // create message
-    public Message addMessage(Message message) {
-        int account_id = message.getPosted_by();
-        Account account = accountDAO.getAccountById(account_id);
-        if (message.getMessage_text().isBlank() || message.getMessage_text().length() >= 255 || Objects.isNull(account) ) { 
-        return null;
-        } else {
-        Message newMessage = messageDAO.addMessage(message);
-       return newMessage;
-    } 
+    public MessageService(MessageDAO messageDAO)
+    {
+        this.messageDAO = messageDAO;
     }
 
-    public Message getMessageById(int id) {
-       return messageDAO.getMessageById(id);
-    }
-
-    public ArrayList<Message> getAllMessages() {
+    public List<Message> getAllMessages()
+    {
         return messageDAO.getAllMessages();
     }
 
-    public ArrayList<Message> getAllMessagesByUser(int id) {
-        ArrayList<Message> allMessages = messageDAO.getAllMessages();
-        ArrayList<Message> userMessages = new ArrayList<>();
-        for (Message message : allMessages) {
-            if(message.getPosted_by() == id) {
-                userMessages.add(message);
-            }
-        }
-        return userMessages;
+    public Message insertMessageInfo(Message message)
+    {
+        return messageDAO.insertMessage(message);
     }
 
-    public Message updateMessage(int id, String messageText) {
-        Message message = messageDAO.getMessageById(id);
-        if (messageText.isBlank() || Objects.isNull(message) || messageText.length() >= 255) { 
-            return null;
-        } else {
-            messageDAO.updateMessage(id, messageText);
-        } 
+    public Message getMessageAfterPosting(int id)
+    {
         return messageDAO.getMessageById(id);
-       
     }
 
-    public Message deleteMessage(int id) {
-        Message message = messageDAO.getMessageById(id);
-        if(Objects.isNull(message)) {
+    public List<Message> getAllMessagesByAccountId(int id)
+    {
+        return messageDAO.getAllMessagesByAccountId(id);
+    }
+
+    public Message getMessage(int id)
+    {
+        return messageDAO.getMessageById(id);
+    }
+
+    public Message getMessageById(int id) {
+        if (messageDAO.getMessageById(id).getMessage_text().isEmpty()) 
+        {
             return null;
-        } else {
-        return messageDAO.deleteMessage(id);
+        } 
+        else 
+        {
+            return messageDAO.getMessageById(id);
+        }
     }
+
+    public Message updateMessages(int id, Message message)
+    {
+        if(getMessageById(id) != null && message.message_text != "" && message.message_text.length() <= 255)
+        {
+            return messageDAO.updateMessage(id, message); 
+        }
+        return null;
     }
-    
+
+    public Message deleteMessage(int id)
+    {
+        if(getMessageById(id) != null)
+        {
+            return messageDAO.getMessageById(id);
+        }
+        return null;
+    }
 }
