@@ -10,11 +10,11 @@ public class MessageDAO {
 
     public Message addMessage(Message message) {
         // open connection
-        Connection con = ConnectionUtil.getConnection();
+        Connection connection = ConnectionUtil.getConnection();
         try {
         // create a statement
-        String sql = "INSERT INTO message VALUES(default, ?, ?, ?)";
-        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "INSERT INTO message (posted_by, message_text, time_posted_epoch) VALUES(?,?,?)";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, message.getPosted_by());
         ps.setString(2, message.getMessage_text());
         ps.setLong(3, message.getTime_posted_epoch());
