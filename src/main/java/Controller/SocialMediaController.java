@@ -122,7 +122,11 @@ public class SocialMediaController {
     {
         ObjectMapper mapper = new ObjectMapper();
         Message message = mapper.readValue(ctx.body(), Message.class);
-        int updatedMessage = Integer.parseInt(ctx.pathParam("message_id")); 
+        int updatedMessage = Integer.parseInt(ctx.pathParam("message_id"));
+        if(message.message_text.length() > 254){
+            ctx.status(400);
+            return;
+        } 
         Message existingMessage = messageService.updateMessages(updatedMessage, message);
         if(existingMessage != null)
         {
