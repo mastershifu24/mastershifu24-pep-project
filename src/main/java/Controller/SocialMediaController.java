@@ -89,7 +89,7 @@ public class SocialMediaController {
         Message message = om.readValue(ctx.body(), Message.class);
         Message loginMessage = messageService.insertMessageInfo(message);
 
-        if(loginMessage == null || message.message_text.isEmpty() == true || message.message_text.length() > 255)
+        if(loginMessage == null || message.message_text.isEmpty() == true || message.message_text.length() > 254)
         {
             ctx.status(400);
         }

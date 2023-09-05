@@ -24,6 +24,9 @@ public class MessageService {
         return messageDAO.getAllMessages();
     }
 
+    //Warn the user from typing more than 255 characters
+    //Based off what the user gives us, we can let messageDAO input the message //
+    // service layer = brain //
     public Message insertMessageInfo(Message message)
     {
         return messageDAO.insertMessage(message);
@@ -36,6 +39,7 @@ public class MessageService {
 
     public List<Message> getAllMessagesByAccountId(int id)
     {
+        System.out.println(messageDAO.getAllMessagesByAccountId(id));
         return messageDAO.getAllMessagesByAccountId(id);
     }
 
