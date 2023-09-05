@@ -106,12 +106,15 @@ public class SocialMediaController {
         ObjectMapper om = new ObjectMapper();
         int messageId = Integer.parseInt(ctx.pathParam("message_id"));
         Message message = messageService.getMessageAfterPosting(messageId);
+        if(message.message_id != 0){
         ctx.json(om.writeValueAsString(message));
+        }
         ctx.status(200);
+        System.out.println("Message " + message);
     }
 
     private void getMessagesByAccountHandler(Context ctx)throws JsonProcessingException {
-        List<Message> messages = messageService.getAllMessagesByAccountId(1);
+        List<Message> messages = messageService.getAllMessagesByAccountId(Integer.parseInt(ctx.pathParam("account_id")));
         ctx.json(messages);
     }
     

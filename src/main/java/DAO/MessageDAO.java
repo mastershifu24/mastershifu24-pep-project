@@ -76,9 +76,11 @@ public class MessageDAO {
             } 
             else 
             {
+                System.out.println("Empty message here");
                 return new Message(0, 0, "", 0);
             }
         } catch (SQLException e) {
+            System.out.println("Ran into exception here");
             System.out.println(e.getMessage());
         }
         return null; 
